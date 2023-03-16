@@ -22,8 +22,8 @@ $makanan = ['🍜', '🍳', '🍕', '🍛', '🌭'];
 
     <h2>Daftar Makanan</h2>
     <ul>
-        <?php foreach($makanan as $m) { ?>
-        <li><?= $m ?></li>
+        <?php foreach($makanan as $key => $m) { ?>
+        <li><?= $key . '=>' . $m ?></li>
         <?php } ?>
     </ul>
 </body>
