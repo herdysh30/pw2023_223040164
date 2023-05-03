@@ -2,7 +2,7 @@
  
  
  function urutanAngka($angka){
-    $j = 1;
+    $j = "*";
     for($i = 1; $i <= $angka; $i++){
         for($u = 1; $u <= $i; $u++){
             echo $j . " ";

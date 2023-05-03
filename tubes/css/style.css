@@ -1,0 +1,102 @@
+body {
+  background-color: #fff;
+}
+audio {
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+  object-fit: contain;
+}
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+  background-color: #fff;
+  color: #fff;
+}
+.jumbotron {
+  padding-top: 5rem;
+  background-image: url(../img/background/bg1.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0%;
+  color: #fff;
+}
+
+.slider h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.carousel,
+.slide {
+  background-color: #e6e6e6;
+}
+.cards-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.card img {
+  width: 250px;
+}
+.card audio {
+}
+.card {
+  margin: 0 0.5em;
+  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+  border-radius: 10;
+}
+.card-title,
+.card-text {
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0%;
+}
+.audio-ctrl {
+  justify-content: center;
+  width: 250px;
+}
+.carousel-inner {
+  padding: 1em;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: #353535;
+  margin-left: 7%;
+  margin-right: 7%;
+  width: 5vh;
+  height: 5vh;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.lainnya {
+  background-color: #353535;
+}
+.col h2 {
+  color: #fff;
+  margin-bottom: 3rem;
+  margin-left: 1.5rem;
+}
+.col {
+  color: #fff;
+}
+.small-song:hover {
+  border: solid thin grey;
+  transform: translateY(-10px);
+}
+.small-song {
+  background-color: #161616;
+  color: #fff;
+  background: linear-gradient(
+    90deg,
+    rgba(22, 22, 22, 0) 0%,
+    rgba(22, 22, 22, 1) 20%,
+    rgba(22, 22, 22, 1) 42%,
+    rgba(22, 22, 22, 1) 67%,
+    rgba(22, 22, 22, 0) 100%
+  );
+  transition: all 0.3s ease;
+}
+.btnply {
+  cursor: pointer;
+}
+a:link {
+  text-decoration: none;
+}
