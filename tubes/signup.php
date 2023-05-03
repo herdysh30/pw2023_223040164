@@ -15,6 +15,10 @@
         <form>
         <h1 class="text-center">DAFTAR SEKARANG</h1>
         <div class="form-group">
+            <label class="form-label" for="email">Nama :</label>
+            <input class="form-control" type="name" id="name">
+        </div>
+        <div class="form-group">
             <label class="form-label" for="email">Email :</label>
             <input class="form-control" type="email" id="email">
         </div>
