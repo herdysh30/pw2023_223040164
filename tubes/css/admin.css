@@ -1,6 +1,17 @@
-a:link {
-  text-decoration: none;
+.hero-nav .active {
+  color: red !important;
+  background-color: transparent !important;
 }
-.menu {
-  border-bottom: solid 4px black;
+
+.hero-nav .active::after {
+  content: "";
+  background-color: red;
+  height: 2px;
+  display: block;
+  margin-top: 5px;
+}
+.hero-area {
+  min-height: 400px;
+  background-position: 20% 30%;
+  background-size: 100%;
 }
