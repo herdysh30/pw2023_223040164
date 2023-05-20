@@ -71,7 +71,6 @@ audio::-webkit-media-controls-panel {
 }
 .col h2 {
   color: #fff;
-  margin-bottom: 3rem;
   margin-left: 1.5rem;
 }
 .col {
@@ -99,4 +98,27 @@ audio::-webkit-media-controls-panel {
 }
 a:link {
   text-decoration: none;
+}
+
+.hero-nav .active {
+  color: white !important;
+  background-color: transparent !important;
+}
+
+.hero-nav .active::after {
+  content: "";
+  background-color: white;
+  height: 2px;
+  display: block;
+  margin-top: 5px;
+}
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
 }

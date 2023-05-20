@@ -16,19 +16,19 @@
         <h1 class="text-center">DAFTAR SEKARANG</h1>
         <div class="form-group">
             <label class="form-label" for="email">Nama :</label>
-            <input class="form-control" type="name" id="name">
+            <input class="form-control" type="name" id="name" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="email">Email :</label>
-            <input class="form-control" type="email" id="email">
+            <input class="form-control" type="email" id="email" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="password">Password :</label>
-            <input class="form-control" type="password" id="password">
+            <input class="form-control" type="password" id="password" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="password">Ulangi Password :</label>
-            <input class="form-control form-control-lg" type="password" id="password">
+            <input class="form-control form-control-lg" type="password" id="password" required>
         </div>
 
         <p>Sudah Punya Akun ? <a href="login.php">Login Disini</a></p>

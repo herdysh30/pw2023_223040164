@@ -16,11 +16,11 @@
             <h1 class="text-center">LOG IN</h1>
         <div class="form-group">
             <label class="form-label" for="email">Email :</label>
-            <input class="form-control" type="email" id="email">
+            <input class="form-control" type="email" id="email" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="password">Password :</label>
-            <input class="form-control" type="password" id="password">
+            <input class="form-control" type="password" id="password" required>
         </div>
         <div class="form-group">
             <input class="form-check-input" type="checkbox" id="check">
