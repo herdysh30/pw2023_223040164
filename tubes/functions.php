@@ -82,3 +82,7 @@ function cari_user($keyword){
     $query = "SELECT * FROM user WHERE nama LIKE '%$keyword%' OR password LIKE '%$keyword%' OR email LIKE '%$keyword%'";
     return query($query);
 }
+function cari_musik($keyword){
+    $query = "SELECT * FROM song WHERE judul LIKE '%$keyword%' OR penyanyi LIKE '%$keyword%'";
+    return query($query);
+}

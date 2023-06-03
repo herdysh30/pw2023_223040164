@@ -8,6 +8,9 @@ $song = query("SELECT * FROM song");
 if(isset($_POST["cari_user"])){
   $user = cari_user($_POST["keyword_user"]);
 }
+if(isset($_POST["cari_musik"])){
+  $song = cari_musik($_POST["keyword_musik"]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -113,6 +116,10 @@ if(isset($_POST["cari_user"])){
             <button class="mb-3">
               <a href="admin/tambah.lagu.php">Tambah Data</a>
             </button>
+            <form action="" method="post">
+                <input type="text" name="keyword_musik" size="40" placeholder="Masukan Keyword Pencarian" autocomplete="off">
+                <button type="submit" name="cari_musik">Cari !</button>
+              </form>
                 <table class="song-table table table-bordered table-sm">
                   <th>No.</th>
                   <th>Aksi</th>
