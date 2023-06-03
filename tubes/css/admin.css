@@ -1,22 +1,63 @@
-.hero-nav .active {
-  color: red !important;
+.nav .active {
+  color: white !important;
   background-color: transparent !important;
 }
-
-.hero-nav .active::after {
+.nav .active::after {
   content: "";
-  background-color: red;
+  background-color: white;
   height: 2px;
   display: block;
   margin-top: 5px;
 }
-
 table {
   border: 1px solid black;
+}
+th {
+  text-align: center;
 }
 
 th,
 td {
   border: 1px solid black;
   padding: 8px;
+}
+.song-table {
+  vertical-align: middle;
+}
+.edit {
+  position: relative;
+  display: inline-block;
+}
+.edit:hover::after {
+  content: "Edit";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+.hapus {
+  position: relative;
+  display: inline-block;
+}
+.hapus:hover::after {
+  content: "Hapus";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

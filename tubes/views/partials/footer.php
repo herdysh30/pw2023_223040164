@@ -3,10 +3,8 @@
       <div class="col-3 ms-5">
         <h5>Menu Cepat</h5>
         <ul class="nav flex-column" >
-          <li><a href="#home" style="text-decoration=none">Home</a></li>
-          <li><a href="#" style="text-decoration=none">Library</a></li>
+          <li><a href="index.php" style="text-decoration=none">Home</a></li>
           <li><a href="genre.php" style="text-decoration=none">Genre</a></li>
-          <li><a href="#most-played" style="text-decoration=none">Most Played Music</a></li>
         </ul>
       </div>
       <div class="col-3">

@@ -1,5 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   background-color: #fff;
+}
+:target:before {
+  content: "";
+  display: block;
+  height: 70px; /* Tinggi navbar */
+  margin: -70px 0 0; /* Balikkan tinggi navbar dengan margin negatif */
 }
 audio {
   max-height: 100%;
@@ -18,7 +27,12 @@ audio::-webkit-media-controls-panel {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0%;
+  border-radius: 10%;
   color: #fff;
+  min-height: 600px;
+}
+.jumbotron h1 {
+  vertical-align: middle;
 }
 
 .slider h2 {

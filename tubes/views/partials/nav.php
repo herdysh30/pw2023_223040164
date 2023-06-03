@@ -1,17 +1,16 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm fixed-top"data-bs-theme="dark">
     <div class="container">
-      <a class="navbar-brand" href="#home">Musik</a>
+      <a class="navbar-brand" href="index.php">Musik</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? 'active' : '' ; ?>" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? 'active' : '' ; ?>" aria-current="page" href="<?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? '#home' : '' ; ?> <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'genre.php') ? 'index.php' : '' ; ?>">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Library</a>
-          </li>
+          <?= ($_SERVER['REQUEST_URI'] === BASE_URL . "index.php") ? "<li class='nav-item'><a class='nav-link' href='#slider'>Populer</a></li>" : '' ; ?>
+          <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? "<li class='nav-item'><a class='nav-link' href='#lainnya'>Lainnya</a></li>" : '' ; ?> 
           <li class="nav-item">
             <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'genre.php') ? 'active' : '' ; ?>" href="genre.php">Genre</a>
           </li>

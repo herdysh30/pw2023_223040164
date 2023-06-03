@@ -1,8 +1,13 @@
 <?php
-//koneksi database 
-$conn = mysqli_connect("localhost", "root", "","musik");
-$result = mysqli_query($conn, "SELECT * FROM user");
+require 'functions.php';
+$result = mysqli_query($conn, "SELECT * FROM user,song");
+$user = query("SELECT * FROM user");
+$song = query("SELECT * FROM song");
 
+//tombol cari ditekan
+if(isset($_POST["cari_user"])){
+  $user = cari_user($_POST["keyword_user"]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,17 +30,17 @@ $result = mysqli_query($conn, "SELECT * FROM user");
           <span class="navbar-toggler-icon"></span>
         </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Library</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="genre.php">Genre</a>
-          </li>
-        </ul>
+        <ul class="nav nav-pills container align-item-center d-flex" id="pills-tab" role="tablist">
+			    <li class="nav-item" role="presentation">
+		        <button class="text-white nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dashboard</button>
+			   </li>
+			    <li class="nav-item" role="presentation">
+			      <button class="text-white nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Users</button>
+			    </li>
+			    <li class="nav-item" role="presentation">
+			      <button class="text-white nav-link" id="pills-musik-tab" data-bs-toggle="pill" data-bs-target="#pills-musik" type="button" role="tab" aria-controls="pills-musik" aria-selected="false">Musik</button>
+			    </li>
+		    </ul>
         <img class="rounded-circle ms-2" src="img/user.png" style="width:40px;height:40px">
         <li class="nav-item dropdown d-flex">
           <a class="nav-link dropdown-toggle text-white ms-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,30 +58,29 @@ $result = mysqli_query($conn, "SELECT * FROM user");
   </nav>
 <!-- Akhir Navbar -->
 <!-- List Menu -->
-<div class="hero-area text-black pt-5 mt-2">
+<div class="hero-area text-black pt-5 mt-5">
 	<div class="nav-spacer"></div>
-		<ul class="hero-nav nav m-4 nav-pills mb-3 container" id="pills-tab" role="tablist">
-			<li class="nav-item" role="presentation">
-		        <button class="text-black nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dashboard</button>
-			</li>
-			<li class="nav-item" role="presentation">
-			    <button class="text-black nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Users</button>
-			</li>
-			<li class="nav-item" role="presentation">
-			    <button class="text-black nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-musik" type="button" role="tab" aria-controls="pills-musik" aria-selected="false">Musik</button>
-			</li>
-		</ul>
-        <!-- Menu 1 -->
+		
+        <!-- Menu Dashboard -->
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active container" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
             <div class="m-1 ms-4 col-md-6 row align-items-center">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis vitae adipisci placeat odit harum dolorem, fugiat esse omnis atque quas neque deserunt error nulla, dolor consectetur explicabo voluptas iste incidunt cupiditate! Veritatis ratione delectus cupiditate ab nihil rerum at rem iste harum facere blanditiis, dicta, vel, nemo similique. Doloribus, molestiae?</p>
             </div>
           </div>
-        <!-- Menu 3 -->
+        <!-- Menu Admin -->
           <div class="tab-pane fade container" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-            <div class="m-1 ms-4 col-md-6 row align-items-center table-responsive">
-                <table cellpadding="10" cellspacing="0" class="table table-bordered table-sm align-middle">
+            <h1 class="text-center">Daftar User</h1>
+            <div class="">
+              <button class="mb-3" >
+                <a href="admin/tambah.user.php">Tambah Data</a>
+              </button>
+              <form action="" method="post">
+                <input type="text" name="keyword_user" size="40" placeholder="Masukan Keyword Pencarian" autocomplete="off">
+                <button type="submit" name="cari_user">Cari !</button>
+              </form>
+              <br>
+                <table cellpadding="10" cellspacing="0" class="table table-bordered table-sm table-responsive">
                   <th>No.</th>
                   <th>Aksi</th>
                   <th>User_ID</th>
@@ -84,12 +88,12 @@ $result = mysqli_query($conn, "SELECT * FROM user");
                   <th>Password</th>
                   <th>Email</th>
                   <?php $i = 1; ?>
-                  <?php while($row = mysqli_fetch_assoc($result)): ?>
+                  <?php foreach($user as $row) : ?>
                   <tr>
                       <td><?= $i; ?></td>
-                      <td>
-                        <a href="#">Ubah</a>
-                        <a href="#">Hapus</a>
+                      <td class="text-center">
+                        <a href="admin/ubah.user.php?user_id=<?= $row["user_id"]; ?>"><i class="edit bi bi-pencil-square me-2"></i></a>
+                        <a href="admin/hapus.user.php?user_id=<?= $row["user_id"]; ?>" onclick="return confirm('Yakin ?')"><i class="hapus bi bi-trash3"></i></a>
                       </td>
                       <td><?= $row["user_id"]; ?></td>
                       <td><?= $row["nama"]; ?></td>
@@ -97,15 +101,43 @@ $result = mysqli_query($conn, "SELECT * FROM user");
                       <td><?= $row["email"]; ?></td>
                   </tr>
                   <?php $i++ ?>
-                  <?php endwhile; ?>
+                  <?php endforeach; ?>
 
                 </table>
             </div>
           </div>
-          <!-- Menu 4 -->
+          <!-- Menu Lagu -->
           <div class="tab-pane fade container" id="pills-musik" role="tabpanel" aria-labelledby="pills-musik-tab" tabindex="0">
-            <div class="m-1 ms-4 col-md-6 row align-items-center">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quas illo laborum! Officia iusto asperiores odio, ipsam porro repudiandae. Consequatur, distinctio magnam. Placeat, libero. Deleniti distinctio voluptatibus, placeat sequi voluptatem sapiente impedit voluptates itaque iusto non laudantium totam dolores nisi consequatur. Minus delectus, neque repellat ex ipsum error odio animi.</p>
+          <h1 class="text-center">Daftar Musik</h1>
+            <div class="col-md-8 table-responsive">
+            <button class="mb-3">
+              <a href="admin/tambah.lagu.php">Tambah Data</a>
+            </button>
+                <table class="song-table table table-bordered table-sm">
+                  <th>No.</th>
+                  <th>Aksi</th>
+                  <th>Gambar</th>
+                  <th>Judul</th>
+                  <th>Penyanyi</th>
+                  <th></th>
+                  <?php $n = 1; ?>
+                  <?php foreach($song as $row) : ?>
+                  <tr class="text-center align-items-center">
+                      <td><?= $n; ?></td>
+                      <td class="text-center">
+                        <a href="admin/ubah.musik.php?song_id=<?= $row["song_id"]; ?>"><i class="edit bi bi-pencil-square me-2"></i></a>
+                        <a href="admin/hapus.lagu.php?song_id=<?= $row["song_id"]; ?>" onclick="return confirm('Yakin ?')"><i class="hapus bi bi-trash3"></i></a>
+                      </td>
+                      <td><img src="<?php echo $row["img"]; ?>" width="100"></td>
+                      <td><?= $row["judul"]; ?></td>
+                      <td><?= $row["penyanyi"]; ?></td>
+                      <td></td>
+
+                  </tr>
+                  <?php $n++ ?>
+                  <?php endforeach; ?>
+
+                </table>
             </div>
           </div>
         </div>
