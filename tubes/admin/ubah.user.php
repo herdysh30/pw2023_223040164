@@ -44,7 +44,7 @@ if( isset($_POST["submit"]) ) {
         </li>
         <li>
             <label for="password">Password :</label>
-            <input type="password" name="password" id="password" value="<?= $user["password"]?>"> 
+            <input type="text" name="password" id="password" value="<?= $user["password"]?>"> 
         </li>
         <li>
             <label for="email">Email :</label>

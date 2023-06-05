@@ -35,8 +35,9 @@ if( isset($_POST["submit"]) ) {
 </head>
 <body>
    <h1>Edit Data User</h1> 
-   <form method="post">
+   <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="song_id" value="<?= $song["song_id"]?>">
+    <input type="hidden" name="gambarLama" value="<?= $song["img"]?>">
     <ul>
     <li>
             <label for="judul">Judul :</label>
@@ -47,8 +48,9 @@ if( isset($_POST["submit"]) ) {
             <input type="text" name="penyanyi" id="penyanyi" value="<?= $song["penyanyi"]?>">
         </li>
         <li>
-            <label for="img">Gambar :</label>
-            <input type="text" name="img" id="img" value="<?= $song["img"]?>">
+            <label for="img">Gambar :</label><br>
+            <img src="../img/music/<?= $song['img']; ?>" width="100" alt=""><br>
+            <input type="file" name="img" id="img">
         </li>
         <li>
             <label for="file">File :</label>

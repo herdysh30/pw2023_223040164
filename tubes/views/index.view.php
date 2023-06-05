@@ -38,7 +38,7 @@ $song = query("SELECT * FROM song");
             <div class="carousel-item" >
               <div class="cards-wrapper" data-aos="fade-up">
                 <div class="card">
-                  <img src= <?=$msk['img']; ?> class="card-img" alt="img">
+                  <img src= "img/music/<?php echo $msk['img']; ?>" class="card-img" alt="img">
                   <div class="card-body card-img-overlay"></div>
                   <h5 class="card-title"><?= $msk['judul']; ?></h5>
                   <p class="card-text"><?= $msk['penyanyi']; ?></p>
@@ -94,7 +94,7 @@ $song = query("SELECT * FROM song");
             <div class="small-song  ms-4 col-md-8 row align-items-center">
               <div class="col-1 h3"></div>
                 <div class="col d-flex">
-                  <img class="rounded m-1" src="<?=$msk['img']; ?>" style="width:50px;height:50px;object-fit:cover;">
+                  <img class="rounded m-1" src="img/music/<?php echo $msk['img']; ?>" style="width:50px;height:50px;object-fit:cover;">
                     <div class="ms-1 mt-1">
                       <div><?= $msk['judul']; ?></div>
                         <small class="text-secondary"><?= $msk['penyanyi']; ?></small>

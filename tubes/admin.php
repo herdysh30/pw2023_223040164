@@ -135,7 +135,7 @@ if(isset($_POST["cari_musik"])){
                         <a href="admin/ubah.musik.php?song_id=<?= $row["song_id"]; ?>"><i class="edit bi bi-pencil-square me-2"></i></a>
                         <a href="admin/hapus.lagu.php?song_id=<?= $row["song_id"]; ?>" onclick="return confirm('Yakin ?')"><i class="hapus bi bi-trash3"></i></a>
                       </td>
-                      <td><img src="<?php echo $row["img"]; ?>" width="100"></td>
+                      <td><img src="img/music/<?php echo $row["img"]; ?>" width="100"></td>
                       <td><?= $row["judul"]; ?></td>
                       <td><?= $row["penyanyi"]; ?></td>
                       <td></td>

@@ -1,3 +1,12 @@
+<?php 
+require("functions.php");
+if(isset($_POST["register"])){
+    if(registrasi($_POST) > 0){
+        echo "<script>alert ('User baru berhasil ditambahkan!')</script>";
+    }else
+    echo mysqli_error($conn);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,28 +21,28 @@
 <body>
     <!-- Login -->
     <div class="login">
-        <form>
+        <form action="" method="post">
         <h1 class="text-center">DAFTAR SEKARANG</h1>
         <div class="form-group">
             <label class="form-label" for="email">Nama :</label>
-            <input class="form-control" type="name" id="name" required>
+            <input class="form-control" type="name" id="name" name="name" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="email">Email :</label>
-            <input class="form-control" type="email" id="email" required>
+            <input class="form-control" type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="password">Password :</label>
-            <input class="form-control" type="password" id="password" required>
+            <input class="form-control" type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
-            <label class="form-label" for="password">Ulangi Password :</label>
-            <input class="form-control form-control-lg" type="password" id="password" required>
+            <label class="form-label" for="password2">Ulangi Password :</label>
+            <input class="form-control form-control-lg" type="password" id="password2" name="password2" required>
         </div>
 
         <p>Sudah Punya Akun ? <a href="login.php">Login Disini</a></p>
 
-        <input class="btn btn-success w-100" type="submit" value="SIGN UP" >
+        <input class="btn btn-success w-100" type="submit" value="SIGN UP" name="register">
         </form>
     </div>
 
