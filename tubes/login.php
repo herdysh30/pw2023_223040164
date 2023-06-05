@@ -1,3 +1,28 @@
+<?php 
+require("functions.php");
+
+if(isset($_POST["login"])){
+
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
+
+    //cek username
+    if(mysqli_num_rows($result) === 1){
+
+        //cek password
+        $row = mysqli_fetch_assoc($result);
+        if (password_verify($password, $row["password"])){
+            header("Location: index.php");
+            exit;
+        }
+    }
+
+    $error = true;
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,15 +37,18 @@
 <body>
     <!-- Login -->
     <div class="login">
-        <form>
+        <form action="" method="post">
             <h1 class="text-center">LOG IN</h1>
+            <?php if(isset($error)): ?>
+                <p style="color : red; font-style:italic;">Email / Password salah</p>
+            <?php endif;  ?>
         <div class="form-group">
             <label class="form-label" for="email">Email :</label>
-            <input class="form-control" type="email" id="email" required>
+            <input class="form-control" type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
             <label class="form-label" for="password">Password :</label>
-            <input class="form-control" type="password" id="password" required>
+            <input class="form-control" type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
             <input class="form-check-input" type="checkbox" id="check">
@@ -28,7 +56,7 @@
         </div>
         <p>Belum Punya Akun ? <a href="signup.php">Daftar Sekarang!</a></p>
 
-        <input class="btn btn-success w-100" type="submit" value="SIGN IN">
+        <button class="btn btn-success w-100" type="submit" name="login" >SIGN IN</button>
         </form>
     </div>
 
