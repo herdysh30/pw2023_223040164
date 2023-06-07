@@ -7,17 +7,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? 'active' : '' ; ?>" aria-current="page" href="<?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? '#home' : '' ; ?> <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'genre.php') ? 'index.php' : '' ; ?>">Home</a>
+            <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? 'active' : '' ; ?>" aria-current="page" href="#home">Home</a>
           </li>
-          <?= ($_SERVER['REQUEST_URI'] === BASE_URL . "index.php") ? "<li class='nav-item'><a class='nav-link' href='#slider'>Populer</a></li>" : '' ; ?>
-          <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'index.php') ? "<li class='nav-item'><a class='nav-link' href='#lainnya'>Lainnya</a></li>" : '' ; ?> 
+          <li class='nav-item'>
+            <a class="nav-link " href='#slider'>Populer</a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link' href='#lainnya'>Lainnya</a>
+          </li>
           <li class="nav-item">
-            <a class="nav-link <?= ($_SERVER['REQUEST_URI'] === BASE_URL . 'genre.php') ? 'active' : '' ; ?>" href="genre.php">Genre</a>
+            <a class="nav-link" href="#genre">Genre</a>
           </li>
         </ul>
         <form class="d-flex position-absolute top-30 start-50 translate-middle-x" role="search">
           <input class="form-control me-2" type="search" placeholder="Cari Musik" aria-label="Search">
-          <b utton class="btn btn-outline-success" type="submit">Search</b>
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
 
         <img class="rounded-circle ms-2" src="img/user.png" style="width:40px;height:40px">
@@ -29,7 +33,7 @@
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><a class="dropdown-item" href="#">Account Setting</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
+            <li><a class="dropdown-item" href="../tubes/logout.php">Log Out</a></li>
           </ul>
         </li>
       </div>
