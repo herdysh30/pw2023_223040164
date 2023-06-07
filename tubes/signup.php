@@ -21,7 +21,7 @@ if(isset($_POST["register"])){
 <body>
     <!-- Login -->
     <div class="login">
-        <form action="" method="post">
+        <form action="" method="post" autocomplete="off">
         <h1 class="text-center">DAFTAR SEKARANG</h1>
         <div class="form-group">
             <label class="form-label" for="email">Nama :</label>

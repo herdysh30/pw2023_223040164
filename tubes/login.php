@@ -1,4 +1,10 @@
 <?php 
+session_start();
+
+if(isset($_SESSION["login"])){
+    header("Location: index.php");
+    exit;
+}
 require("functions.php");
 
 if(isset($_POST["login"])){
@@ -13,8 +19,17 @@ if(isset($_POST["login"])){
 
         //cek password
         $row = mysqli_fetch_assoc($result);
+        $role = $row['role'];
         if (password_verify($password, $row["password"])){
-            header("Location: index.php");
+            // set session
+            $_SESSION["login"] = true;
+            if($role == 'admin'){
+                $_SESSION['role']='admin';
+                header("Location: admin.php");
+            }else{
+                $_SESSION['role']='user';
+                header("Location: index.php");
+            }
             exit;
         }
     }

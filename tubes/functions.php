@@ -42,11 +42,50 @@ function tambah_musik($data_musik){
     if (!$gambar){
         return false;
     }
-    $file = htmlspecialchars ($data_musik["file"]);
+    $file = upload_musik();
+    if (!$file){
+        return false;
+    }
 
     $query = "INSERT INTO song VALUES (NULL, '$gambar', '$judul', '$penyanyi', '$file')";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
+}
+function upload_musik(){
+    $namaFile = $_FILES['file']['name'];
+    $ukuranFile = $_FILES['file']['size'];
+    $error = $_FILES['file']['error'];
+    $tmpName = $_FILES['file']['tmp_name'];
+
+    //cek apakah tidak ada musik yang diupload
+    if ($error === 4){
+        echo "<script>
+            alert'pilih file terlebih dahulu!');
+        </script>";
+        return false;
+    }
+    // cek apakah yang diupload adalah musik
+    $ekstensiMusikValid = ['mp3', 'wav'];
+    $ekstensiMusik = explode('.', $namaFile);
+    $ekstensiMusik = strtolower(end($ekstensiMusik));
+    if(!in_array($ekstensiMusik, $ekstensiMusikValid)){
+        echo "<script>
+            alert'Yang anda upload bukan musik ! ');
+        </script>";
+        return false;
+    }
+
+    //lolos pengecekan, musik siap diupload
+    //generate nama musik baru
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiMusik;
+
+
+    move_uploaded_file($tmpName, '../music/' . $namaFileBaru);
+
+    return $namaFileBaru;
+
 }
 function upload_gambar(){
     $namaFile = $_FILES['img']['name'];
@@ -171,7 +210,7 @@ function registrasi($data){
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //tambah user baru ke database
-    $query = "INSERT INTO user VALUES (NULL, '$nama', '$password', '$email')";
+    $query = "INSERT INTO user VALUES (NULL, '$nama', '$password', '$email', 'user')";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn); 
 
