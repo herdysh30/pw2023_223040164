@@ -53,7 +53,7 @@ if(isset($_POST["cari_musik"])){
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><a class="dropdown-item" href="#">Account Setting</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
+            <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
           </ul>
         </li>
       </div>
@@ -75,13 +75,14 @@ if(isset($_POST["cari_musik"])){
           <div class="tab-pane fade container" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
             <h1 class="text-center">Daftar User</h1>
             <div class="">
-              <button class="mb-3" >
-                <a href="admin/tambah.user.php">Tambah Data</a>
+              <button class="tambah btn mb-1 justify-content-center" >
+              <h4><a href="admin/tambah.user.php"><i class="bi bi-person-fill-add"></i></a></h4>
               </button>
-              <form action="" method="post">
-                <input type="text" name="keyword_user" size="40" placeholder="Masukan Keyword Pencarian" autocomplete="off">
-                <button type="submit" name="cari_user">Cari !</button>
+              <form class="d-flex col-4" role="search" action="" method="post" autocomplete="off">
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Masukan Keyword Pencarian" aria-label="Search" name="keyword_user" size="10">
+                <button class="btn btn-outline-success" type="submit" name="cari_user">Cari</button>
               </form>
+              
               <br>
                 <table cellpadding="10" cellspacing="0" class="table table-bordered table-sm table-responsive">
                   <th>No.</th>
@@ -90,6 +91,7 @@ if(isset($_POST["cari_musik"])){
                   <th>Nama</th>
                   <th>Password</th>
                   <th>Email</th>
+                  <th>Role</th>
                   <?php $i = 1; ?>
                   <?php foreach($user as $row) : ?>
                   <tr>
@@ -102,6 +104,7 @@ if(isset($_POST["cari_musik"])){
                       <td><?= $row["nama"]; ?></td>
                       <td><?= $row["password"]; ?></td>
                       <td><?= $row["email"]; ?></td>
+                      <td><?= $row["role"]; ?></td>
                   </tr>
                   <?php $i++ ?>
                   <?php endforeach; ?>
@@ -112,15 +115,15 @@ if(isset($_POST["cari_musik"])){
           <!-- Menu Lagu -->
           <div class="tab-pane fade container" id="pills-musik" role="tabpanel" aria-labelledby="pills-musik-tab" tabindex="0">
           <h1 class="text-center">Daftar Musik</h1>
-            <div class="col-md-8 table-responsive">
-            <button class="mb-3">
-              <a href="admin/tambah.lagu.php">Tambah Data</a>
-            </button>
-            <form action="" method="post">
-                <input type="text" name="keyword_musik" size="40" placeholder="Masukan Keyword Pencarian" autocomplete="off">
-                <button type="submit" name="cari_musik">Cari !</button>
+            <div class="col-md-8">
+            <button class="tambah btn justify-content-center" >
+              <h4><a href="admin/tambah.lagu.php"><i class="bi bi-file-earmark-plus-fill"></i></a></h4>
+              </button>
+            <form class="d-flex col-4 mb-3 ms-2" role="search" action="" method="post" autocomplete="off">
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Masukan Keyword Pencarian" aria-label="Search" name="keyword_musik" size="10">
+                <button class="btn btn-outline-success" type="submit" name="cari_musik">Cari</button>
               </form>
-                <table class="song-table table table-bordered table-sm">
+                <table class="song-table table table-bordered table-sm table-responsive">
                   <th>No.</th>
                   <th>Aksi</th>
                   <th>Gambar</th>
@@ -130,7 +133,7 @@ if(isset($_POST["cari_musik"])){
                   <?php $n = 1; ?>
                   <?php foreach($song as $row) : ?>
                   <tr class="text-center align-items-center">
-                      <td><?= $n; ?></td>
+                      <td class="justify-content-center"><?= $n; ?></td>
                       <td class="text-center">
                         <a href="admin/ubah.musik.php?song_id=<?= $row["song_id"]; ?>"><i class="edit bi bi-pencil-square me-2"></i></a>
                         <a href="admin/hapus.lagu.php?song_id=<?= $row["song_id"]; ?>" onclick="return confirm('Yakin ?')"><i class="hapus bi bi-trash3"></i></a>
