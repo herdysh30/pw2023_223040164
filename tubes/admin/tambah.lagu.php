@@ -3,16 +3,17 @@ require("../functions.php");
 if( isset($_POST["submit"]) ) {
 
     //cek keberhasilan insert
+    // var_dump($_POST);die;
     if(tambah_musik($_POST) > 0){
         echo "
         <script>
-            alert('Data berhasil ditambahkan!')
-            document.location.href = '../admin.php'
+            alert('Data berhasil ditambahkan!');
+            document.location.href = '../admin.php';
         </script>";
     }else {
         echo "<script>
-        alert('Data gagal ditambahkan!')
-        document.location.href = '../admin.php?'
+        alert('Data gagal ditambahkan!');
+        document.location.href = '../admin.php';
     </script>";
     }
 }
@@ -46,14 +47,24 @@ if( isset($_POST["submit"]) ) {
         </li>
         <li class="col-3">
             <label for="img" class="form-label">Gambar :</label>
-            <input class="form-control" type="file" name="img" id="img" required>
+            <input class="form-control" type="file" name="img" id="img" >
         </li>
         <li class="col-3">
             <label class="form-label" for="file">File :</label>
             <input class="form-control mb-2" type="file" name="file" id="file" >
         </li>
+        <li class="col-2">
+            <label for="id_category" class="form-label">Kategori :</label>
+            <select class="form-select" name="id_category" id="id_category">
+                <option value="">Pilih Kategori</option>
+                <option value="1">K-Pop</option>
+                <option value="2">Pop</option>
+                <option value="3">J-Pop</option>
+                <option value="4">Populer</option>
+            </select>
+        </li>
         <li>
-            <button class="btn btn-secondary" type="submit" name="submit" value="submit">Tambahkan Data!</button>
+            <button class="btn btn-secondary" type="submit" name="submit">Tambahkan Data!</button>
         </li>
     </ul>
    </form>

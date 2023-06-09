@@ -47,7 +47,9 @@ function tambah_musik($data_musik){
         return false;
     }
 
-    $query = "INSERT INTO song VALUES (NULL, '$gambar', '$judul', '$penyanyi', '$file')";
+    $kategori = $data_musik['id_category'];
+
+    $query = "INSERT INTO song VALUES (NULL, '$gambar', '$judul', '$penyanyi', '$file', $kategori)";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
@@ -144,7 +146,7 @@ function ubah_user($data_user){
 
     $id = $data_user["user_id"];
     $nama = htmlspecialchars($data_user['nama']);
-    $password = htmlspecialchars ($data_user["password"]);
+    $password = htmlspecialchars (password_hash($data_user["password"], PASSWORD_DEFAULT));
     $email = htmlspecialchars ($data_user["email"]);
 
     $query = "UPDATE user SET nama = '$nama', password = '$password', email = '$email' WHERE user_id ='$id' ";

@@ -1,15 +1,29 @@
 <?php
 require 'functions.php';
-$result = mysqli_query($conn, "SELECT * FROM user,song");
-$user = query("SELECT * FROM user");
-$song = query("SELECT * FROM song");
+
+//pagination
+  //konfigurasi
+  $jumlahDataPerHalaman = 5;
+  $jumlahData = count(query("SELECT * FROM song"));
+  $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+  $halamanAktif = ( isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+  $awalData = ( $jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+
 
 //tombol cari ditekan
-if(isset($_POST["cari_user"])){
-  $user = cari_user($_POST["keyword_user"]);
+if(isset($_GET["cari_user"])){
+  $keyword = $_GET['keyword_user'];
+  $query = "SELECT * FROM user WHERE nama LIKE '%$keyword%' OR password LIKE '%$keyword%' OR email LIKE '%$keyword%' OR role LIKE '%$keyword%'";
+  $user = query($query);
+}else{
+  $user = query("SELECT * FROM user");
 }
-if(isset($_POST["cari_musik"])){
-  $song = cari_musik($_POST["keyword_musik"]);
+if(isset($GET["cari_musik"])){
+  $key = $_GET['keyword_musik'];
+  $quer = "SELECT * FROM song WHERE judul LIKE '%$keyw%' OR penyanyi LIKE '%$key%'";
+  $song = query($quer);
+}else{
+  $song = query("SELECT * FROM song NATURAL JOIN nama_category LIMIT $awalData, $jumlahDataPerHalaman");
 }
 ?>
 
@@ -78,23 +92,32 @@ if(isset($_POST["cari_musik"])){
               <button class="tambah btn mb-1 justify-content-center" >
               <h4><a href="admin/tambah.user.php"><i class="bi bi-person-fill-add"></i></a></h4>
               </button>
-              <form class="d-flex col-4" role="search" action="" method="post" autocomplete="off">
-                <input class="form-control form-control-sm me-2" type="search" placeholder="Masukan Keyword Pencarian" aria-label="Search" name="keyword_user" size="10">
+              
+              <form class="d-flex col-4" role="search" action="" method="get" autocomplete="off">
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Masukan Keyword Pencarian" aria-label="Search" name="keyword_user" id="keyword_user" size="10">
                 <button class="btn btn-outline-success" type="submit" name="cari_user">Cari</button>
               </form>
+
+
               
               <br>
+
+              <div id="search-container">
+                <?php if($user) : ?>
                 <table cellpadding="10" cellspacing="0" class="table table-bordered table-sm table-responsive">
-                  <th>No.</th>
-                  <th>Aksi</th>
-                  <th>User_ID</th>
-                  <th>Nama</th>
-                  <th>Password</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <?php $i = 1; ?>
-                  <?php foreach($user as $row) : ?>
-                  <tr>
+                  <thead>
+                    <th scope="col">No.</th>
+                    <th scope="col">Aksi</th>
+                    <th scope="col">User_ID</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                  </thead>
+                  <tbody>
+                    <?php $i = 1; ?>
+                    <?php foreach($user as $row) : ?>
+                      <tr>
                       <td><?= $i; ?></td>
                       <td class="text-center">
                         <a href="admin/ubah.user.php?user_id=<?= $row["user_id"]; ?>"><i class="edit bi bi-pencil-square me-2"></i></a>
@@ -105,11 +128,21 @@ if(isset($_POST["cari_musik"])){
                       <td><?= $row["password"]; ?></td>
                       <td><?= $row["email"]; ?></td>
                       <td><?= $row["role"]; ?></td>
-                  </tr>
-                  <?php $i++ ?>
-                  <?php endforeach; ?>
-
+                    </tr>
+                    <?php $i++ ?>
+                    <?php endforeach; ?>
+                  </tbody>
                 </table>
+                <?php else : ?>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="alert alert-danger" role="alert">
+                        Data tidak ditemukan!
+                      </div>
+                    </div>
+                  </div>
+                  <?php endif; ?>
+              </div>
             </div>
           </div>
           <!-- Menu Lagu -->
@@ -119,19 +152,40 @@ if(isset($_POST["cari_musik"])){
             <button class="tambah btn justify-content-center" >
               <h4><a href="admin/tambah.lagu.php"><i class="bi bi-file-earmark-plus-fill"></i></a></h4>
               </button>
-            <form class="d-flex col-4 mb-3 ms-2" role="search" action="" method="post" autocomplete="off">
-                <input class="form-control form-control-sm me-2" type="search" placeholder="Masukan Keyword Pencarian" aria-label="Search" name="keyword_musik" size="10">
+            <form class="d-flex col-4 mb-3 ms-2" role="search" action="" method="get" autocomplete="off">
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Masukan Keyword Pencarian" aria-label="Search" name="keyword_musik" id="keyword_musik" size="10">
                 <button class="btn btn-outline-success" type="submit" name="cari_musik">Cari</button>
               </form>
+              <!-- Nav Page -->
+              <div id="navigation">
+                <?php if($halamanAktif > 1) :?>
+                  <a href="?halaman=<?= $halamanAktif - 1; ?>">&laquo;</a>
+                  <?php endif; ?>
+                  <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                    <?php if($i == $halamanAktif): ?>
+                      <a href="?halaman=<?= $i; ?>" style="font-weight: bold; color: black;"><?= $i; ?></a>
+                      <?php else : ?>
+                        <a href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                        <?php endif; ?>
+                        <?php endfor; ?>
+                        <?php if($halamanAktif < $jumlahHalaman) :?>
+                          <a href="?halaman=<?= $halamanAktif + 1; ?>">&raquo;</a>
+                          <?php endif; ?>
+                </div>
+                <div id="search-container-musik">
+                <?php if($song) : ?>
                 <table class="song-table table table-bordered table-sm table-responsive">
-                  <th>No.</th>
-                  <th>Aksi</th>
-                  <th>Gambar</th>
-                  <th>Judul</th>
-                  <th>Penyanyi</th>
-                  <th></th>
-                  <?php $n = 1; ?>
-                  <?php foreach($song as $row) : ?>
+                  <thead>
+                    <th>No.</th>
+                    <th>Aksi</th>
+                    <th>Gambar</th>
+                    <th>Judul</th>
+                    <th>Penyanyi</th>
+                    <th>Kategori</th>
+                  </thead>
+                  <tbody>
+                    <?php $n = 1; ?>
+                    <?php foreach($song as $row) : ?>
                   <tr class="text-center align-items-center">
                       <td class="justify-content-center"><?= $n; ?></td>
                       <td class="text-center">
@@ -141,18 +195,28 @@ if(isset($_POST["cari_musik"])){
                       <td><img src="img/music/<?php echo $row["img"]; ?>" width="100"></td>
                       <td><?= $row["judul"]; ?></td>
                       <td><?= $row["penyanyi"]; ?></td>
-                      <td></td>
-
-                  </tr>
-                  <?php $n++ ?>
-                  <?php endforeach; ?>
-
-                </table>
+                      <td><?= strtoupper($row["category"]); ?></td>
+                    </tr>
+                    <?php $n++ ?>
+                    <?php endforeach; ?>
+                  </tbody>
+                  </table>
+                  <?php else : ?>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="alert alert-danger" role="alert">
+                        Data tidak ditemukan!
+                      </div>
+                    </div>
+                  </div>
+                  <?php endif; ?>
+              </div>
             </div>
           </div>
         </div>
   </div>
 </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script/script.js"></script>
 </body>
 </html>
