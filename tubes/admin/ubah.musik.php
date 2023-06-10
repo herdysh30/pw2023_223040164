@@ -56,13 +56,22 @@ if( isset($_POST["submit"]) ) {
             <input class="form-control" class="form-control" type="file" name="img" id="img">
         </li>
         <li class="col-3">
-            <label class="form-label" for="song">File :</label><br>
+            <label class="form-label" for="file">File :</label><br>
             <audio controls class="audio-ctrl bg-white mb-2">
                 <source src="../music/<?= $song['file']; ?>" type="audio/mpeg">
             </audio>
-            <input class="form-control mb-2" type="file" name="song" id="song" value="<?= $song['file']; ?>">
+            <input class="form-control mb-2" type="file" name="file" id="file">
         </li>
-        
+        <li class="col-2">
+            <label for="id_category" class="form-label">Kategori :</label>
+            <select class="form-select" name="id_category" id="id_category">
+                <option value="">Pilih Kategori</option>
+                <option value="1">K-Pop</option>
+                <option value="2">Pop</option>
+                <option value="3">J-Pop</option>
+                <option value="4">Populer</option>
+            </select>
+        </li>
         <li>
             <button class="btn btn-secondary" type="submit" name="submit">Edit Data!</button>
         </li>

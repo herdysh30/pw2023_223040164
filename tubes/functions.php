@@ -162,6 +162,7 @@ function ubah_song($data_musik){
 
     $gambarLama = htmlspecialchars ($data_musik["gambarLama"]);
     $fileLama =$data_musik["fileLama"];
+    $kategori = $data_musik['id_category'];
     // var_dump($fileLama);die;
     //cek apakah user pilih gambar baru atau tidak
     if($_FILES['img']['error'] === 4){
@@ -170,14 +171,14 @@ function ubah_song($data_musik){
         $gambar = upload_gambar();
     }
 
-    if($_FILES['song']['error'] === 4){
-        $file = $fileLama ;
+    if($_FILES['file']['error'] === 4){
+        $file = $fileLama;
         // var_dump($file);die;
     }else{
         $file = upload_musik();
     }
 
-    $query = "UPDATE song SET judul = '$judul', penyanyi = '$penyanyi', img = '$gambar', file = '$file' WHERE song_id ='$id' ";
+    $query = "UPDATE song SET judul = '$judul', penyanyi = '$penyanyi', img = '$gambar', file = '$file', id_category = $kategori WHERE song_id ='$id' ";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
