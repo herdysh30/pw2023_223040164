@@ -28,19 +28,20 @@ if(isset($_POST["login"])){
     $password = $_POST["password"];
 
     $result = mysqli_query($conn, "SELECT * FROM user WHERE email = '$email'");
-
+    
     //cek username
     if(mysqli_num_rows($result) === 1){
 
         //cek password
         $row = mysqli_fetch_assoc($result);
+        //set cookie
         $role = $row['role'];
         $userId = $row['user_id'];
         $nama = $row['nama'];
         if (password_verify($password, $row["password"])){
             // set session
             $_SESSION["login"] = true;
-
+            
             //cek remember me
             if(isset($_POST['check'])){
                 //buat cookie
@@ -48,14 +49,14 @@ if(isset($_POST["login"])){
                 setcookie('id', $row['user_id'], time()+60);
                 setcookie('key', hash('sha256', $row['email']), time()+60);
             }
-
+            $_SESSION['user_id']=$userId;
+            $_SESSION['nama']=$nama;
+            $_SESSION['role']=$role;
             if($role == 'admin'){
                 header("Location: admin.php");
             }else{            
                 header("Location: index.php");
             }
-        $_SESSION['user_id']=$userId;
-        $_SESSION['nama']=$nama;
             exit;
         }
     }

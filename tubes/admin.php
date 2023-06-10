@@ -1,6 +1,7 @@
 <?php
 require 'functions.php';
 
+
 //pagination
   //konfigurasi
   $jumlahDataPerHalaman = 5;

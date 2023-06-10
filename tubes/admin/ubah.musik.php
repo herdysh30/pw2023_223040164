@@ -11,15 +11,16 @@ if( isset($_POST["submit"]) ) {
 
     //cek keberhasilan edit
     if(ubah_song($_POST) > 0){
+        // die;
         echo "
         <script>
-            alert('Data berhasil diedit!')
-            document.location.href = '../admin.php'
+        alert('Data berhasil diedit!')
+        document.location.href = '../admin.php'
         </script>";
     }else {
+        // var_dump($_POST);die;
         echo "<script>
         alert('Data gagal diedit!')
-        document.location.href = '../admin.php'
     </script>";
     }
 }
@@ -39,6 +40,7 @@ if( isset($_POST["submit"]) ) {
    <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="song_id" value="<?= $song["song_id"]?>">
     <input type="hidden" name="gambarLama" value="<?= $song["img"]?>">
+    <input type="hidden" name="fileLama" value="<?= $song["file"]?>">
     <ul class="m-3">
         <li class="col-2">
             <label class="form-label" for="judul">Judul :</label>
@@ -54,9 +56,13 @@ if( isset($_POST["submit"]) ) {
             <input class="form-control" class="form-control" type="file" name="img" id="img">
         </li>
         <li class="col-3">
-            <label class="form-label" for="file">File :</label>
-            <input class="form-control mb-2" type="file" name="file" id="file" value="<?= $song["file"]?>">
+            <label class="form-label" for="song">File :</label><br>
+            <audio controls class="audio-ctrl bg-white mb-2">
+                <source src="../music/<?= $song['file']; ?>" type="audio/mpeg">
+            </audio>
+            <input class="form-control mb-2" type="file" name="song" id="song" value="<?= $song['file']; ?>">
         </li>
+        
         <li>
             <button class="btn btn-secondary" type="submit" name="submit">Edit Data!</button>
         </li>

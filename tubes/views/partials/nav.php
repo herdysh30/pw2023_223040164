@@ -29,7 +29,7 @@ $name = $kolom['nama'];
         </ul>
         <div class="d-flex position-absolute top-30 start-50 translate-middle-x">
             <input class="form-control me-2" type="text" placeholder="Cari Musik" id="pencarian">
-            <button class="btn btn-outline-success" onclick="searchAndScroll()" >Search</button>
+            <button class="btn btn-outline-success" onclick="searchAndScroll()">Search</button>
         </div>
 
         <img class="rounded-circle ms-2" src="img/user.png" style="width:40px;height:40px">
