@@ -152,13 +152,13 @@ $k_pop = query("SELECT * FROM song WHERE id_category = '1'");
       <div class=" text-black ">
 	      <div class="nav-spacer searchable"></div>
 		      <ul ul class="genre-tab nav m-4 nav-pills container" id="pills-tab" role="tablist" data-aos="fade-down">
-			      <li class="nav-item" role="presentation">
+			      <li class="nav-item searchable" role="presentation">
 		          <button class="text-secondary nav-link active" id="pills-jpop-tab" data-bs-toggle="pill" data-bs-target="#pills-jpop" type="button" role="tab" aria-controls="pills-jpop" aria-selected="true">Pop</button>
 			      </li>
-			      <li class="nav-item" role="presentation">
+			      <li class="nav-item searchable" role="presentation">
 		          <button class="text-secondary nav-link" id="pills-pop-tab" data-bs-toggle="pill" data-bs-target="#pills-pop" type="button" role="tab" aria-controls="pills-pop" aria-selected="false">J-Pop</button>
 			      </li>
-			      <li class="nav-item" role="presentation">
+			      <li class="nav-item searchable" role="presentation">
 			        <button class="text-secondary nav-link" id="pills-kpop-tab" data-bs-toggle="pill" data-bs-target="#pills-kpop" type="button" role="tab" aria-controls="pills-kpop" aria-selected="false">K-Pop</button>
 			      </li>
 		      </ul>
